@@ -13,7 +13,7 @@ class LicenseResult {
 }
 
 class LicenseService {
-  static const String _gistId = 'YOUR_GIST_ID_V2';
+  static const String _gistId = 'a8332a1b7724bccdafeb43d91040f679';
   static const String _fileName = 'keys_v2.json';
   static const String _savedKeyPref = 'saved_license_key_v2';
   static const String _savedDevicePref = 'saved_device_id_v2';

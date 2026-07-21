@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 
 class VodafoneService {
-  static const String _remoteConfigUrl = 'https://alaarafeek5522-ai.github.io/card_vf_v2_config/config.json';
+  static const String _remoteConfigUrl = 'https://alaarafeek5522-ai.github.io/card_vf_v2_config/config_v2.json';
   static const String _localConfigFile = 'config_v2.json';
 
   static Future<String> _getLocalConfigPath() async {
