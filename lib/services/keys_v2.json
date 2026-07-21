@@ -1,0 +1,29 @@
+{
+  "keys": {
+    "ABCD-EFGH-IJKL": {
+      "active": true,
+      "duration": 30,
+      "unit": "days",
+      "registered_at": null,
+      "expires_at": null,
+      "device_id": null
+    },
+    "MNOP-QRST-UVWX": {
+      "active": true,
+      "duration": 90,
+      "unit": "days",
+      "registered_at": null,
+      "expires_at": null,
+      "device_id": null
+    }
+  },
+  "app_control": {
+    "force_stop": false,
+    "force_stop_msg": "التطبيق موقوف مؤقتاً",
+    "force_update": false,
+    "force_update_msg": "يوجد تحديث جديد",
+    "update_url": "",
+    "message": "",
+    "message_title": "تنبيه"
+  }
+}
