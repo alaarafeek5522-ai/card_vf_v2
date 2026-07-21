@@ -79,10 +79,18 @@ class _OfferCard extends StatelessWidget {
   final OfferModel offer;
   const _OfferCard({required this.offer});
 
-  Future<void> _launchUrl(String url) async {
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
+  Future<void> _launchUrl(String urlString) async {
+    final Uri uri = Uri.parse(urlString);
+    try {
+      final bool launched = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
+      if (!launched) {
+        debugPrint('Could not launch $urlString');
+      }
+    } catch (e) {
+      debugPrint('Error launching URL: $e');
     }
   }
 
@@ -152,20 +160,66 @@ class _OfferCard extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: _ActionButton(
-                        icon: Icons.chat_rounded,
-                        label: 'واتساب',
-                        color: const Color(0xFF25D366),
-                        onTap: () => _launchUrl(offer.whatsapp),
+                      child: GestureDetector(
+                        onTap: () async {
+                          HapticFeedback.lightImpact();
+                          await _launchUrl(offer.whatsapp);
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF25D366).withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: const Color(0xFF25D366).withOpacity(0.3)),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(Icons.chat_rounded, color: Color(0xFF25D366), size: 18),
+                              const SizedBox(width: 8),
+                              Text(
+                                'واتساب',
+                                style: GoogleFonts.cairo(
+                                  color: const Color(0xFF25D366),
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
-                      child: _ActionButton(
-                        icon: Icons.telegram,
-                        label: 'تلجرام',
-                        color: const Color(0xFF0088CC),
-                        onTap: () => _launchUrl(offer.telegram),
+                      child: GestureDetector(
+                        onTap: () async {
+                          HapticFeedback.lightImpact();
+                          await _launchUrl(offer.telegram);
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF0088CC).withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: const Color(0xFF0088CC).withOpacity(0.3)),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(Icons.telegram, color: Color(0xFF0088CC), size: 18),
+                              const SizedBox(width: 8),
+                              Text(
+                                'تلجرام',
+                                style: GoogleFonts.cairo(
+                                  color: const Color(0xFF0088CC),
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -174,53 +228,6 @@ class _OfferCard extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _ActionButton extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final Color color;
-  final VoidCallback onTap;
-
-  const _ActionButton({
-    required this.icon,
-    required this.label,
-    required this.color,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        HapticFeedback.lightImpact();
-        onTap();
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: color.withOpacity(0.3)),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, color: color, size: 18),
-            const SizedBox(width: 8),
-            Text(
-              label,
-              style: GoogleFonts.cairo(
-                color: color,
-                fontSize: 13,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
