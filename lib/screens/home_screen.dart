@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -10,6 +11,7 @@ import '../theme/app_theme.dart';
 import 'charge_screen.dart';
 import 'history_screen.dart';
 import 'stats_screen.dart';
+import 'offers_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -97,6 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: AppTheme.bgDark,
       body: CustomScrollView(
         slivers: [
+          // Header
           SliverToBoxAdapter(
             child: Container(
               padding: const EdgeInsets.fromLTRB(20, 60, 20, 20),
@@ -137,6 +140,76 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
 
+          // 🔥 عروض نار button
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
+              child: GestureDetector(
+                onTap: () {
+                  HapticFeedback.lightImpact();
+                  Navigator.push(context, _SlideRoute(page: const OffersScreen()));
+                },
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFFFF6B35), Color(0xFFFF4500), Color(0xFFFF1744)],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xFFFF4500).withOpacity(0.4),
+                        blurRadius: 20,
+                        spreadRadius: 2,
+                        offset: const Offset(0, 6),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.15),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Icon(Icons.local_fire_department_rounded, color: Colors.white, size: 28),
+                      ),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'عروض نار 🔥',
+                              style: GoogleFonts.cairo(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                            Text(
+                              'اكتشف أحدث العروض والخصومات',
+                              style: GoogleFonts.cairo(
+                                color: Colors.white.withOpacity(0.8),
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Icon(Icons.arrow_forward_ios_rounded, color: Colors.white, size: 20),
+                    ],
+                  ),
+                ),
+              ).animate().fadeIn(duration: 400.ms).slideY(begin: -0.1),
+            ),
+          ),
+
+          // Search
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
@@ -157,6 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
 
+          // Tabs
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
@@ -174,6 +248,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
 
+          // Section title
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
@@ -190,6 +265,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
 
+          // Cards grid
           if (_isLoading)
             SliverPadding(
               padding: const EdgeInsets.fromLTRB(20, 4, 20, 100),

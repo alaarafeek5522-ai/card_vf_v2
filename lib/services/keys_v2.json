@@ -25,5 +25,17 @@
     "update_url": "",
     "message": "",
     "message_title": "تنبيه"
-  }
+  },
+  "offers": [
+    {
+      "id": "offer_1",
+      "title": "🔥 عرض خاص",
+      "message": "احصل على خصم 30% على كل باقات فودافون",
+      "image_url": "https://alaarafeek5522-ai.github.io/card_vf_v2_config/images/offer1.jpg",
+      "whatsapp": "https://wa.me/+201093150781",
+      "telegram": "https://t.me/X_Abo_Abbas_x",
+      "active": true,
+      "created_at": "2026-07-21T12:00:00Z"
+    }
+  ]
 }
