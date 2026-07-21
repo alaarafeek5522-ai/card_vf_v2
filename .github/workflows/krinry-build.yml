@@ -64,9 +64,10 @@ jobs:
               mkdir -p android/app/src/main/res/$folder
               convert "$ICON_PATH" -resize ${size}x${size} android/app/src/main/res/$folder/ic_launcher.png
             done
-            echo "Icons generated"
+            echo "✅ Icons generated from app_icon.png"
           else
-            echo "app_icon.png not found, using default"
+            echo "❌ app_icon.png not found!"
+            exit 1
           fi
 
       - name: Build APK
