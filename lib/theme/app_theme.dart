@@ -116,7 +116,7 @@ class AppTheme {
       contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
       hintStyle: GoogleFonts.cairo(color: textMuted),
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: bgCard,
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),

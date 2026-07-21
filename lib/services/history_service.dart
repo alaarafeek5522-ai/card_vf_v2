@@ -82,7 +82,7 @@ class HistoryService {
       phoneCounts[h.phone] = (phoneCounts[h.phone] ?? 0) + 1;
     }
     final sorted = phoneCounts.entries.toList()..sort((a, b) => b.value.compareTo(a.value));
-n    return sorted.take(5).map((e) => history.firstWhere((h) => h.phone == e.key)).toList();
+    return sorted.take(5).map((e) => history.firstWhere((h) => h.phone == e.key)).toList();
   }
 
   static Future<void> clearHistory() async {
