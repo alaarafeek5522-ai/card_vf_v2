@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 
 class AppControlService {
-  static const String _gistId = 'a8332a1b7724bccdafeb43d91040f679';
+  static const String _gistId = '2785cef01df36d14fa5ebada2e31ef09';
   static const String _fileName = 'keys_v2.json';
 
   static String get _token {
